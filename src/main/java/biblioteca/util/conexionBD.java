@@ -16,7 +16,6 @@ public class conexionBD {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             con = DriverManager.getConnection(url, user, password);
-            System.out.println("Se conectó a la BD correctamente");
         } catch (ClassNotFoundException e) {
             System.err.println("Error: No se encontró el driver de MySQL");
             e.printStackTrace();

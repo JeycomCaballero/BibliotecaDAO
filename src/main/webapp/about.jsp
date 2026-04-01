@@ -26,7 +26,8 @@
         <link href="css/style.css" rel="stylesheet">
     </head>
 
-    <bod<!-- Navbar Start -->
+    <body>
+       <!-- Navbar Start -->
         <div class="container-fluid p-0 nav-bar">
             <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
                 <a href="index.jsp" class="navbar-brand px-lg-4 m-0">
@@ -37,7 +38,7 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav ml-auto p-4">
-                        <a href="librosDisponiblesIndexServlet" class="nav-item nav-link">Inicio</a>
+                        <a href="librosDisponiblesIndexServlet" class="nav-item nav-link ">Inicio</a>
                         <a href="about.jsp" class="nav-item nav-link active">Nosotros</a>
                         <a href="service.jsp" class="nav-item nav-link">Servicios</a>
                         <a href="librosDisponiblesServlet" class="nav-item nav-link">Catalogo Libros</a>
@@ -47,6 +48,7 @@
                                 <a href="registroPrestamoServlet" class="dropdown-item">Registro Prestamos</a>
                                 <a href="listaP.jsp" class="dropdown-item">Prestamos</a>
                                 <a href="login.jsp" class="dropdown-item">Login</a>
+                                <a href="login.jsp" class="dropdown-item">Registro</a>
                                 <a href="index.jsp" class="dropdown-item">Cerrar sesion</a>
                             </div>
                         </div>

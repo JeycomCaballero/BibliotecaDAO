@@ -156,13 +156,45 @@ public class PrestamoDAOImpl implements PrestamoDAO {
     }
 
     private ClPrestamo mapear(ResultSet rs) throws SQLException {
-        ClEditorial editorial = new ClEditorial(rs.getInt("idEditorial"), rs.getString("nombre"), rs.getString("pais"), rs.getString("sitioWeb"));
-        ClCategoria categoria = new ClCategoria(rs.getInt("idCategoria"), rs.getString("nombre"), rs.getString("descripcion"));
-        ClLibro libro = new ClLibro(rs.getInt("idLibro"), rs.getString("titulo"), rs.getString("isbn"), rs.getDate("añoPublicacion"), rs.getInt("numPaginas"), rs.getInt("disponible"), editorial, categoria);
-        ClRol rol = new ClRol(rs.getInt("idRol"), rs.getString("tipoRol"));
-        ClAutor autor = new ClAutor(rs.getInt("idAutor"), rs.getString("nombres"), rs.getString("apellidos"), rs.getString("nacionalidad"), rs.getDate("fechaNacimiento"));
-        ClUsuario usuario = new ClUsuario(rs.getInt("idUsuario"), rs.getInt("documento"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), rs.getString("telefono"), rs.getInt("estado"), rs.getString("contraseña"), rol);
-        return new ClPrestamo(rs.getInt("idPrestamo"), rs.getDate("fechaPrestamo"), rs.getDate("fechaDevolucionEsperada"), rs.getDate("fechaDevolucionReal"), rs.getInt("estado"), libro, usuario);
+        ClEditorial editorial = new ClEditorial(
+                rs.getInt("idEditorial"),
+                rs.getString("nombre"),
+                rs.getString("pais"),
+                rs.getString("sitioWeb"));
+        ClCategoria categoria = new ClCategoria(
+                rs.getInt("idCategoria"),
+                rs.getString("nombre"),
+                rs.getString("descripcion"));
+        ClLibro libro = new ClLibro(rs.getInt("idLibro"),
+                rs.getString("titulo"),
+                rs.getString("isbn"),
+                rs.getDate("añoPublicacion"),
+                rs.getInt("numPaginas"),
+                rs.getInt("disponible"),
+                editorial, categoria);
+        ClRol rol = new ClRol(rs.getInt("idRol"),
+                rs.getString("tipoRol"));
+        ClAutor autor = new ClAutor(
+                rs.getInt("idAutor"),
+                rs.getString("nombres"),
+                rs.getString("apellidos"),
+                rs.getString("nacionalidad"),
+                rs.getDate("fechaNacimiento")
+        );
+        ClUsuario usuario = new ClUsuario(
+                rs.getInt("idUsuario"),
+                rs.getInt("documento"),
+                rs.getString("nombre"),
+                rs.getString("apellido"),
+                rs.getString("email"), rs.getString("telefono"),
+                rs.getInt("estado"), rs.getString("contraseña"), rol);
+        return new ClPrestamo(rs.getInt("idPrestamo"),
+                rs.getDate("fechaPrestamo"),
+                rs.getDate("fechaDevolucionEsperada"),
+                rs.getDate("fechaDevolucionReal"),
+                rs.getInt("estado"),
+                libro,
+                usuario);
     }
 
     private ClPrestamo mapearSimple(ResultSet rs) throws SQLException {

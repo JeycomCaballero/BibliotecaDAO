@@ -27,7 +27,7 @@
     </head>
 
     <body>
-        <!-- Navbar Start -->
+       <!-- Navbar Start -->
         <div class="container-fluid p-0 nav-bar">
             <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
                 <a href="index.jsp" class="navbar-brand px-lg-4 m-0">
@@ -38,7 +38,7 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav ml-auto p-4">
-                        <a href="librosDisponiblesIndexServlet" class="nav-item nav-link">Inicio</a>
+                        <a href="librosDisponiblesIndexServlet" class="nav-item nav-link ">Inicio</a>
                         <a href="about.jsp" class="nav-item nav-link">Nosotros</a>
                         <a href="service.jsp" class="nav-item nav-link active">Servicios</a>
                         <a href="librosDisponiblesServlet" class="nav-item nav-link">Catalogo Libros</a>
@@ -48,6 +48,7 @@
                                 <a href="registroPrestamoServlet" class="dropdown-item">Registro Prestamos</a>
                                 <a href="listaP.jsp" class="dropdown-item">Prestamos</a>
                                 <a href="login.jsp" class="dropdown-item">Login</a>
+                                <a href="registro.jsp" class="dropdown-item">Registro</a>
                                 <a href="index.jsp" class="dropdown-item">Cerrar sesion</a>
                             </div>
                         </div>
@@ -108,19 +109,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6 mb-5">
-                        <div class="row align-items-center">
-                            <div class="col-sm-5">
-                                <img class="img-fluid mb-3 mb-sm-0" src="img/service-3.jpg" alt="">
-                            </div>
-                            <div class="col-sm-7">
-                                <h4><i class="fa fa-exclamation-circle service-icon"></i>Control de Multas</h4>
-                                <p class="m-0">
-                                    Generación automática de multas cuando los libros no son devueltos en la fecha establecida.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+      
 
                     <div class="col-lg-6 mb-5">
                         <div class="row align-items-center">

@@ -9,10 +9,8 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free Website Template" name="keywords">
         <meta content="Free Website Template" name="description">
-
-        <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
-
+        <!-- Animacion AO-->
+        <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
         <!-- Google Font -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
@@ -31,7 +29,7 @@
         <link href="css/style.css" rel="stylesheet">
     </head>
 
-    <body>
+    <body class="loading">
         <!-- Navbar Start -->
         <div class="container-fluid p-0 nav-bar">
             <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
@@ -53,6 +51,7 @@
                                 <a href="registroPrestamoServlet" class="dropdown-item">Registro Prestamos</a>
                                 <a href="listaP.jsp" class="dropdown-item">Prestamos</a>
                                 <a href="login.jsp" class="dropdown-item">Login</a>
+                                <a href="login.jsp" class="dropdown-item">Registro</a>
                                 <a href="index.jsp" class="dropdown-item">Cerrar sesion</a>
                             </div>
                         </div>
@@ -97,12 +96,15 @@
         <!-- About Start -->
         <div class="container-fluid py-5">
             <div class="container">
-                <div class="section-title">
+                <div class="section-title" data-aos="fade-up">
                     <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Sobre Nosotros</h4>
                     <h1 class="display-4">Sistema de Biblioteca BIBLIOSENA</h1>
                 </div>
+
                 <div class="row">
-                    <div class="col-lg-4 py-0 py-lg-5">
+
+
+                    <div class="col-lg-4 py-0 py-lg-5" data-aos="fade-right">
                         <h1 class="mb-3">Nuestra Historia</h1>
                         <h5 class="mb-3">Un sistema creado para optimizar la gestión de bibliotecas</h5>
                         <p>
@@ -113,13 +115,15 @@
                         <a href="#" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">Más información</a>
                     </div>
 
-                    <div class="col-lg-4 py-5 py-lg-0" style="min-height: 500px;">
+
+                    <div class="col-lg-4 py-5 py-lg-0" style="min-height: 500px;" data-aos="zoom-in">
                         <div class="position-relative h-100">
                             <img class="position-absolute w-98 h-" src="img/about.png" style="object-fit: cover;">
                         </div>
                     </div>
 
-                    <div class="col-lg-4 py-0 py-lg-5">
+
+                    <div class="col-lg-4 py-0 py-lg-5" data-aos="fade-left">
                         <h1 class="mb-3">Nuestra Funcionalidad</h1>
                         <p>
                             El sistema permite gestionar todos los procesos clave de una biblioteca,
@@ -131,6 +135,7 @@
                         <h5 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Administración de autores, categorías y editoriales</h5>
                         <a href="#" class="btn btn-primary font-weight-bold py-2 px-4 mt-2">Ver más</a>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -140,13 +145,13 @@
         <!-- Service Start -->
         <div class="container-fluid pt-5">
             <div class="container">
-                <div class="section-title">
+                <div class="section-title" data-aos="fade-up">
                     <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Servicios</h4>
                     <h1 class="display-4">Gestión de Biblioteca</h1>
                 </div>
                 <div class="row">
 
-                    <div class="col-lg-6 mb-5">
+                    <div class="col-lg-6 mb-5" data-aos="fade-right">
                         <div class="row align-items-center">
                             <div class="col-sm-5">
                                 <img class="img-fluid mb-3 mb-sm-0" src="img/service-1.jpg" alt="">
@@ -160,7 +165,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6 mb-5">
+                    <div class="col-lg-6 mb-5" data-aos="fade-left" data-aos-delay="200">
                         <div class="row align-items-center">
                             <div class="col-sm-5">
                                 <img class="img-fluid mb-3 mb-sm-0" src="img/service-2.png" alt="">
@@ -174,21 +179,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6 mb-5">
-                        <div class="row align-items-center">
-                            <div class="col-sm-5">
-                                <img class="img-fluid mb-3 mb-sm-0" src="img/service-3.jpg" alt="">
-                            </div>
-                            <div class="col-sm-7">
-                                <h4><i class="fa fa-exclamation-circle service-icon"></i>Control de Multas</h4>
-                                <p class="m-0">
-                                    Generación automática de multas cuando los libros no son devueltos en la fecha establecida.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 mb-5">
+                    <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="300">
                         <div class="row align-items-center">
                             <div class="col-sm-5">
                                 <img class="img-fluid mb-3 mb-sm-0" src="img/service-4.png" alt="">
@@ -209,16 +200,16 @@
 
 
         <!-- Offer Start -->
-        <div class="offer container-fluid my-5 py-5 text-center position-relative overlay-top overlay-bottom">
+        <div class="offer container-fluid my-5 py-5 text-center position-relative overlay-top overlay-bottom" data-aos="zoom-in">
             <div class="container py-5">
-                <h1 class="display-3 text-primary mt-3">BIBLIOSENA</h1>
+                <h1 class="display-3 text-primary mt-3" data-aos="fade-up" data-aos="fade-up" data-aos-delay="100">BIBLIOSENA</h1>
                 <h1 class="text-white mb-3">Regístrate y accede al sistema</h1>
-                <h4 class="text-white font-weight-normal mb-4 pb-3">
+                <h4 class="text-white font-weight-normal mb-4 pb-3" data-aos="fade-up" data-aos-delay="200">
                     Solicita préstamos de libros, consulta tus devoluciones y revisa tus multas en línea
                 </h4>
-                <form class="form-inline justify-content-center mb-4">
+                <form action="preRegistroU" method="POST" class="form-inline justify-content-center mb-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="input-group">
-                        <input type="text" class="form-control p-4" placeholder="Ingresa tu correo" style="height: 60px;">
+                        <input type="text" name="correoR" class="form-control p-4" placeholder="Ingresa tu correo" style="height: 60px;">
                         <div class="input-group-append">
                             <button class="btn btn-primary font-weight-bold px-4" type="submit">Registrarse</button>
                         </div>
@@ -231,17 +222,16 @@
         <!-- Libros Disponibles Start -->
         <div class="container-fluid pt-5">
             <div class="container">
-                <div class="section-title">
+                <div class="section-title" data-aos="fade-up">
                     <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Catálogo</h4>
                     <h1 class="display-4">Libros Disponibles</h1>
                 </div>
                 <div class="row">
 
-                    <c:forEach var="libro" items="${libros}" begin="0" end="5">
-                        <div class="col-lg-4 col-md-6 mb-5">
+                    <c:forEach var="libro" items="${libros}" begin="0" end="5" varStatus="status">
+                        <div class="col-lg-4 col-md-6 mb-5" data-aos="fade-up" data-aos-delay="${status.index * 100}">
                             <div class="row align-items-center">
                                 <div class="col-12">
-                                    <!-- Estado de disponibilidad -->
                                     <c:choose>
                                         <c:when test="${libro.libro.disponible == 1}">
                                             <span class="text-success font-weight-bold">Disponible</span>
@@ -251,10 +241,8 @@
                                         </c:otherwise>
                                     </c:choose>
 
-                                    <!-- Título -->
                                     <h4 class="mt-2">${libro.libro.titulo}</h4>
 
-                                    <!-- Autor y categoría -->
                                     <p>Autor: ${libro.autor.nombres} ${libro.autor.apellidos} | Categoría: ${libro.libro.categoria.nombre}</p>
                                 </div>
                             </div>
@@ -272,7 +260,8 @@
             <div class="container">
                 <div class="reservation position-relative overlay-top overlay-bottom">
                     <div class="row align-items-center">
-                        <div class="col-lg-6 my-5 my-lg-0">
+
+                        <div class="col-lg-6 my-5 my-lg-0" data-aos="fade-right">
                             <div class="p-5">
                                 <div class="mb-4">
                                     <h1 class="display-3 text-primary">Registro</h1>
@@ -290,12 +279,11 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
                             <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
                                 <h1 class="text-white mb-4 mt-5">Registrar Préstamo</h1>
                                 <form class="mb-5" action="PrestamoServlet" method="post">
 
-                                    <!-- Dropdown con búsqueda (Select2) -->
                                     <div class="form-group">
                                         <select name="libro" id="libroSelect" class="form-control bg-transparent border-primary p-4" required>
                                             <option value="">-- Seleccione un libro --</option>
@@ -305,7 +293,6 @@
                                         </select>
                                     </div>
 
-                                    <!-- Fecha de devolución -->
                                     <div class="form-group">
                                         <div class="input-group date" id="fechaDevolucion" data-target-input="nearest">
                                             <input type="text" name="fechaDevolucion"
@@ -339,16 +326,16 @@
         <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
             <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
 
-                <div class="col-lg-3 col-md-6 mb-5">
+                <!-- CONTACTO -->
+                <div class="col-lg-3 col-md-6 mb-5" data-aos="fade-up">
                     <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Contáctanos</h4>
                     <p><i class="fa fa-map-marker-alt mr-2"></i>SENA - Centro de Formación</p>
                     <p><i class="fa fa-phone-alt mr-2"></i>+57 300 000 0000</p>
                     <p class="m-0"><i class="fa fa-envelope mr-2"></i>bibliosena@sena.edu.co</p>
                 </div>
 
-
-
-                <div class="col-lg-3 col-md-6 mb-5">
+                <!-- HORARIOS -->
+                <div class="col-lg-3 col-md-6 mb-5" data-aos="fade-up" data-aos-delay="200">
                     <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Horarios</h4>
                     <div>
                         <h6 class="text-white text-uppercase">Lunes - Viernes</h6>
@@ -360,11 +347,13 @@
                     </div>
                 </div>
 
-
-
             </div>
 
-            <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
+            <!-- COPYRIGHT -->
+            <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5"
+                 style="border-color: rgba(256, 256, 256, .1) !important;"
+                 data-aos="fade-up" data-aos-delay="400">
+
                 <p class="mb-2 text-white">
                     Copyright &copy; <a class="font-weight-bold" href="#">BIBLIOSENA</a>. Todos los derechos reservados.
                 </p>
@@ -397,20 +386,12 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <!-- AO -->
+        <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
         <script>
-            // Inicializar datetimepicker
-            $(function () {
-                $('#fechaDevolucion').datetimepicker({
-                    format: 'YYYY-MM-DD'
-                });
-            });
-
-            // Inicializar Select2 para el dropdown de libros
-            $(document).ready(function () {
-                $('#libroSelect').select2({
-                    placeholder: "Seleccione un libro",
-                    allowClear: true
-                });
+            AOS.init({
+                duration: 1000,
+                once: true
             });
         </script>
     </body>

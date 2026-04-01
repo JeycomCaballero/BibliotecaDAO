@@ -42,7 +42,7 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav ml-auto p-4">
-                        <a href="librosDisponiblesIndexServlet" class="nav-item nav-link">Inicio</a>
+                        <a href="librosDisponiblesIndexServlet" class="nav-item nav-link ">Inicio</a>
                         <a href="about.jsp" class="nav-item nav-link">Nosotros</a>
                         <a href="service.jsp" class="nav-item nav-link">Servicios</a>
                         <a href="librosDisponiblesServlet" class="nav-item nav-link">Catalogo Libros</a>
@@ -52,6 +52,7 @@
                                 <a href="registroPrestamoServlet" class="dropdown-item">Registro Prestamos</a>
                                 <a href="listaP.jsp" class="dropdown-item">Prestamos</a>
                                 <a href="login.jsp" class="dropdown-item">Login</a>
+                                <a href="login.jsp" class="dropdown-item">Registro</a>
                                 <a href="index.jsp" class="dropdown-item">Cerrar sesion</a>
                             </div>
                         </div>
@@ -144,12 +145,15 @@
         <!-- Footer Start -->
         <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
             <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
+
                 <div class="col-lg-3 col-md-6 mb-5">
                     <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Contáctanos</h4>
                     <p><i class="fa fa-map-marker-alt mr-2"></i>SENA - Centro de Formación</p>
                     <p><i class="fa fa-phone-alt mr-2"></i>+57 300 000 0000</p>
                     <p class="m-0"><i class="fa fa-envelope mr-2"></i>bibliosena@sena.edu.co</p>
                 </div>
+
+
 
                 <div class="col-lg-3 col-md-6 mb-5">
                     <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Horarios</h4>
@@ -162,6 +166,9 @@
                         <p>Cerrado</p>
                     </div>
                 </div>
+
+
+
             </div>
 
             <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
