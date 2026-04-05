@@ -1,0 +1,102 @@
+/* =========================
+   🎴 CARD FORM
+========================= */
+
+.form-card {
+    background: rgba(51, 33, 29, 0.9);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+/* HEADER */
+.form-card .card-header {
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.form-card .card-header h4 {
+    color: #DA9F5B;
+}
+
+/* BODY */
+.form-card .card-body {
+    padding: 30px;
+}
+
+/* INPUTS */
+.form-card .form-control {
+    background: rgba(255,255,255,0.05) !important;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff !important;
+    border-radius: 10px;
+}
+
+/* PLACEHOLDER */
+.form-control::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+
+/* DATE */
+input[type="date"] {
+    color: #fff;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+/* SELECT NORMAL (fallback) */
+.form-card .custom-select {
+    background: rgba(255,255,255,0.05) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* OPTIONS */
+.form-card .custom-select option {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+/* =========================
+   🔥 SELECT2 PRO
+========================= */
+
+.select2-container--default .select2-selection--single {
+    background-color: rgba(255,255,255,0.05) !important;
+    border: 1px solid rgba(255,255,255,0.3);
+    height: 50px;
+    border-radius: 10px;
+}
+
+.select2-container--default .select2-selection__rendered {
+    color: #fff !important;
+    line-height: 30px;
+}
+
+.select2-dropdown {
+    background-color: #1a1a1a;
+    color: #fff;
+    border: none;
+}
+
+.select2-results__option {
+    color: #fff;
+}
+
+.select2-results__option--highlighted {
+    background-color: #DA9F5B !important;
+    color: #000 !important;
+}
+
+/* BOTONES */
+.form-card .btn {
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+.form-card .btn:hover {
+    transform: scale(1.05);
+}

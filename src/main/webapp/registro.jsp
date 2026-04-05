@@ -45,13 +45,14 @@
                         <a href="about.jsp" class="nav-item nav-link">Nosotros</a>
                         <a href="service.jsp" class="nav-item nav-link">Servicios</a>
                         <a href="librosDisponiblesServlet" class="nav-item nav-link">Catalogo Libros</a>
+                        <a href="extras.jsp" class="nav-item nav-link">EXTRAS</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu text-capitalize">
                                 <a href="registroPrestamoServlet" class="dropdown-item">Registro Prestamos</a>
                                 <a href="listaP.jsp" class="dropdown-item">Prestamos</a>
                                 <a href="login.jsp" class="dropdown-item">Login</a>
-                                <a href="login.jsp" class="dropdown-item">Registro</a>
+                                <a href="registro.jsp" class="dropdown-item">Registro</a>
                                 <a href="index.jsp" class="dropdown-item">Cerrar sesion</a>
                             </div>
                         </div>
@@ -112,7 +113,7 @@
                         <button class="login-btn" type="submit">
                             <i class="fa fa-user-plus"></i> Registrarse
                         </button>
-
+//sisisi bueno esto llevo yo, no e controlao roles xq eso lo hago al final y asi
                         <div style="text-align:center; margin-top:15px;">
                             <a href="login.jsp" style="color:#fff;">¿Ya tienes cuenta? Inicia sesión</a>
                         </div>
@@ -120,7 +121,6 @@
                     </form>
                 </div>
             </div>
-        </div>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
         <script src="js/main.js"></script>

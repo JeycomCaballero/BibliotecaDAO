@@ -3,10 +3,28 @@ package biblioteca.Dao;
 import biblioteca.model.ClAutor;
 import biblioteca.util.conexionBD;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AutorDAOImpl implements AutorDAO {
 
     PreparedStatement pm;
+
+    @Override
+    public List<ClAutor> listarTodos() {
+        List<ClAutor> lista = new ArrayList<>();
+        String sql = "select * from autor";
+        try (Connection cn = conexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(sql);ResultSet rs = ps.executeQuery()){
+            while (rs.next()) {
+                lista.add(mapear(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+    
+    
 
     @Override
     public boolean registrarAutor(ClAutor autorR) {

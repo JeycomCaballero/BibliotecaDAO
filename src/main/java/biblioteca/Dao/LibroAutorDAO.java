@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface LibroAutorDAO {
     List<ClLibroAutor> listarTodos ();
+    ClLibroAutor listarPorId (int id);
 }

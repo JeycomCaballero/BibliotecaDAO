@@ -33,7 +33,7 @@ public class EditorialDAOImlp implements EditorialDAO{
     public boolean  registrarEditorial(ClEditorial editorialR) {
         
 
-        String consulta = "insert into editorial (nombre,pais,sitio_web) values (?,?,?)";
+        String consulta = "insert into editorial (nombre,pais,sitioWeb) values (?,?,?)";
         try (Connection cn = conexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(consulta);ResultSet rs = ps.executeQuery()){
 
             ps.setString(1, editorialR.getNombre());
@@ -72,7 +72,7 @@ public class EditorialDAOImlp implements EditorialDAO{
     @Override
     public boolean  actualizarEditorial(ClEditorial actualizarE) {
 
-        String consulta = "update editorial set nombre = ?, sitio_web = ? where id = ?";
+        String consulta = "update editorial set nombre = ?, sitioWeb = ? where id = ?";
         try (Connection cn = conexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(consulta);ResultSet rs = ps.executeQuery()){
             ps.setString(1, actualizarE.getNombre());
             ps.setString(2, actualizarE.getSitioWeb());
@@ -91,13 +91,13 @@ public class EditorialDAOImlp implements EditorialDAO{
     @Override
     public boolean buscarEditorial(int id) {
 
-        String consulta = "select nombre, pais, sitio_web from editorial where id = ?";
+        String consulta = "select nombre, pais, sitioWeb from editorial where id = ?";
         try (Connection cn = conexionBD.conectar();PreparedStatement ps = cn.prepareStatement(consulta);ResultSet rs = ps.executeQuery()){
             ps.setInt(1, id);
             if(rs.next()){
                 System.out.println("Nombre: " + rs.getString("nombre"));
                 System.out.println("Pais: " + rs.getString("pais"));
-                System.out.println("Web: " + rs.getString("sitio_web"));
+                System.out.println("Web: " + rs.getString("sitioWeb"));
             }
             else{
                 System.out.println("Editorial no encontrada");
@@ -115,10 +115,10 @@ public class EditorialDAOImlp implements EditorialDAO{
     private ClEditorial mapear (ResultSet rs) throws SQLException{
         
         return new ClEditorial(
-                rs.getInt("id_editorial"),
+                rs.getInt("idEditorial"),
                 rs.getString("nombre"),
                 rs.getString("pais"),
-                rs.getString("sitio_web")
+                rs.getString("sitioWeb")
         );
         
     }

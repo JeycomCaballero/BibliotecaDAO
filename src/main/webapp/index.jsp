@@ -45,13 +45,14 @@
                         <a href="about.jsp" class="nav-item nav-link">Nosotros</a>
                         <a href="service.jsp" class="nav-item nav-link">Servicios</a>
                         <a href="librosDisponiblesServlet" class="nav-item nav-link">Catalogo Libros</a>
+                        <a href="extras.jsp" class="nav-item nav-link">EXTRAS</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu text-capitalize">
                                 <a href="registroPrestamoServlet" class="dropdown-item">Registro Prestamos</a>
                                 <a href="listaP.jsp" class="dropdown-item">Prestamos</a>
                                 <a href="login.jsp" class="dropdown-item">Login</a>
-                                <a href="login.jsp" class="dropdown-item">Registro</a>
+                                <a href="registro.jsp" class="dropdown-item">Registro</a>
                                 <a href="index.jsp" class="dropdown-item">Cerrar sesion</a>
                             </div>
                         </div>
@@ -224,7 +225,7 @@
             <div class="container">
                 <div class="section-title" data-aos="fade-up">
                     <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Catálogo</h4>
-                    <h1 class="display-4">Libros Disponibles</h1>
+                    <h1 class="display-4">Libros</h1>
                 </div>
                 <div class="row">
 
@@ -250,6 +251,7 @@
                     </c:forEach>
 
                 </div>
+                <a href="librosDisponiblesServlet" class="btn btn-primary font-weight-bold py-2 px-4 mt-2">Ver más Libros</a>
             </div>
         </div>
         <!-- Libros Disponibles End -->
@@ -293,14 +295,13 @@
                                         </select>
                                     </div>
 
+
                                     <div class="form-group">
                                         <div class="input-group date" id="fechaDevolucion" data-target-input="nearest">
-                                            <input type="text" name="fechaDevolucion"
-                                                   class="form-control bg-transparent border-primary p-4 datetimepicker-input"
-                                                   data-target="#fechaDevolucion"
+                                            <input type="date" name="fechaDevolucion"
+                                                   class="form-control bg-transparent border-primary p-4"
                                                    placeholder="Fecha de devolución" required />
-                                            <div class="input-group-append" data-target="#fechaDevolucion" data-toggle="datetimepicker">
-                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            <div class="input-group-append" data-target="#fechaDevolucion">
                                             </div>
                                         </div>
                                     </div>

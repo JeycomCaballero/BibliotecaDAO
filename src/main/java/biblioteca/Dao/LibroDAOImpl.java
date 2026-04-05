@@ -14,11 +14,12 @@ public class LibroDAOImpl implements LibroDAO {
     public List<ClLibro> listarTodos() {
         List<ClLibro> lista = new ArrayList<>();
         
-        try (Connection cn = conexionBD.conectar(); PreparedStatement ps = cn.prepareStatement("select l.idLibro, l.titulo, l.isbn, l.añoPublicacion, l.numPaginas, l.disponible, l.idEditorial, l.idCategoria, a.idAutor, a.nombres, a.apellidos, a.nacionalidad, a.fechaNacimiento, c.idCategoria as c_id, c.nombre as c_nombre, c.descripcion as c_descripcion, e.id as e_id, e.nombre as e_nombre, e.pais, e.sitio_web from libro l inner join libro_autor la on l.idLibro = la.idLibro inner join autor a on la.idAutor = a.idAutor inner join categoria c on l.idCategoria = c.idCategoria inner join editorial e on l.idEditorial = e.id");ResultSet rs = ps.executeQuery()){
+        try (Connection cn = conexionBD.conectar(); PreparedStatement ps = cn.prepareStatement("select l.idLibro, l.titulo, l.isbn, l.añoPublicacion, l.numPaginas, l.disponible, l.idEditorial, l.idCategoria, a.idAutor, a.nombres, a.apellidos, a.nacionalidad, a.fechaNacimiento, c.idCategoria as c_id, c.nombre as c_nombre, c.descripcion as c_descripcion, e.idEditorial as e_id, e.nombre as e_nombre, e.pais, e.sitioWeb from libro l inner join libro_autor la on l.idLibro = la.idLibro inner join autor a on la.idAutor = a.idAutor inner join categoria c on l.idCategoria = c.idCategoria inner join editorial e on l.idEditorial = e.idEditorial");ResultSet rs = ps.executeQuery()){
             while(rs.next()){
                 lista.add(mapear(rs));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return lista;
     }
@@ -83,10 +84,16 @@ public class LibroDAOImpl implements LibroDAO {
     @Override
     public boolean actualizarLibro(ClLibro libro) {
 
-        String consulta = "update libro set titulo = ? where id = ?";
+        String consulta = "update libro set titulo = ? , isbn = ? , añoPublicacion = ? , numPaginas = ? ,disponible = ?, idCategoria = ?, idEditorial= ? where idLibro = ?";
         try (Connection cn = conexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(consulta)){
             ps.setString(1, libro.getTitulo());
-            ps.setInt(2, libro.getId());
+            ps.setString(2, libro.getIsbn());
+            ps.setDate(3, libro.getAñoL());
+            ps.setInt(4, libro.getNumeroPaginas());
+            ps.setInt(5, libro.getDisponible());
+            ps.setInt(6, libro.getCategoria().getId());
+            ps.setInt(7, libro.getEditorial().getId());
+            ps.setInt(8, libro.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -110,29 +117,30 @@ public class LibroDAOImpl implements LibroDAO {
     }
 
     private ClLibro mapear(ResultSet rs) throws SQLException {
-        ClEditorial editorial = new ClEditorial(
-                rs.getInt("idEditorial"),
-                rs.getString("nombre"),
-                rs.getString("pais"),
-                rs.getString("sitioWeb")
-        );
 
-        ClCategoria categoria = new ClCategoria(
-                rs.getInt("idCategoria"),
-                rs.getString("nombre"),
-                rs.getString("descripcion")
-        );
+    ClEditorial editorial = new ClEditorial(
+            rs.getInt("e_id"),
+            rs.getString("e_nombre"),
+            rs.getString("pais"),
+            rs.getString("sitioWeb")
+    );
 
-        return new ClLibro(
-                rs.getInt("idLibro"),
-                rs.getString("titulo"),
-                rs.getString("isbn"),
-                rs.getDate("añoPublicacion"),
-                rs.getInt("numPaginas"),
-                rs.getInt("disponible"),
-                editorial,
-                categoria
-        );
-    }
+    ClCategoria categoria = new ClCategoria(
+            rs.getInt("c_id"),
+            rs.getString("c_nombre"),
+            rs.getString("c_descripcion")
+    );
+
+    return new ClLibro(
+            rs.getInt("idLibro"),
+            rs.getString("titulo"),
+            rs.getString("isbn"),
+            rs.getDate("añoPublicacion"),
+            rs.getInt("numPaginas"),
+            rs.getInt("disponible"),
+            editorial,
+            categoria
+    );
+}
 
 }

@@ -1,27 +1,4 @@
-// Animacion
 
-function animacionCarga() {
-    window.addEventListener("load", function () {
-        document.body.classList.add("loaded");
-    });
-}
-
-animacionCarga();
-
-// Inicializar datetimepicker
-$(function () {
-    $('#fechaDevolucion').datetimepicker({
-        format: 'YYYY-MM-DD'
-    });
-});
-
-// Inicializar Select2 para el dropdown de libros
-$(document).ready(function () {
-    $('#libroSelect').select2({
-        placeholder: "Seleccione un libro",
-        allowClear: true
-    });
-});
 (function ($) {
     "use strict";
 
@@ -58,12 +35,14 @@ $(document).ready(function () {
 
 
     // Date and time picker
+    if ($.fn.datetimepicker) {
     $('.date').datetimepicker({
         format: 'L'
     });
     $('.time').datetimepicker({
         format: 'LT'
     });
+}
 
 
     // Testimonials carousel
@@ -92,3 +71,18 @@ $(document).ready(function () {
 
 })(jQuery);
 
+function animacionCarga() {
+    window.addEventListener("load", function () {
+        document.body.classList.remove("loading");
+        document.body.classList.add("loaded");
+    });
+}
+animacionCarga();
+
+// Inicializar Select2 para el dropdown de libros
+$(document).ready(function () {
+    $('#libroSelect').select2({
+        placeholder: "Seleccione un libro",
+        allowClear: true
+    });
+});

@@ -8,6 +8,8 @@
         <title>Catalogo - BIBLIOSENA</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <link href="img/favicon.ico" rel="icon">
+        <!-- Animacion AO-->
+        <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -32,13 +34,14 @@
                         <a href="about.jsp" class="nav-item nav-link">Nosotros</a>
                         <a href="service.jsp" class="nav-item nav-link">Servicios</a>
                         <a href="librosDisponiblesServlet" class="nav-item nav-link active">Catalogo Libros</a>
+                        <a href="extras.jsp" class="nav-item nav-link">EXTRAS</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu text-capitalize">
                                 <a href="registroPrestamoServlet" class="dropdown-item">Registro Prestamos</a>
                                 <a href="listaP.jsp" class="dropdown-item">Prestamos</a>
                                 <a href="login.jsp" class="dropdown-item">Login</a>
-                                <a href="login.jsp" class="dropdown-item">Registro</a>
+                                <a href="registro.jsp" class="dropdown-item">Registro</a>
                                 <a href="index.jsp" class="dropdown-item">Cerrar sesion</a>
                             </div>
                         </div>
@@ -51,7 +54,12 @@
         <!-- Page Header Start -->
         <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
             <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
-                <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Catalogo</h1>
+                <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase" data-aos="fade-down" data-aos-duration="1200">Catálogo</h1>
+                <div class="d-inline-flex mb-lg-5" data-aos="fade-up" data-aos-delay="200">
+                    <p class="m-0 text-white"><a class="text-white" href="">Inicio</a></p>
+                    <p class="m-0 text-white px-2">/</p>
+                    <p class="m-0 text-white">Catálogo</p>
+                </div>
             </div>
         </div>
         <!-- Page Header End -->
@@ -59,17 +67,16 @@
         <!-- Libros Disponibles Start -->
         <div class="container-fluid pt-5">
             <div class="container">
-                <div class="section-title">
+                <div class="section-title" data-aos="fade-up">
                     <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Catálogo</h4>
-                    <h1 class="display-4">Libros Disponibles</h1>
+                    <h1 class="display-4">Libros</h1>
                 </div>
                 <div class="row">
 
-                    <c:forEach var="libro" items="${libros}" begin="0" end="5">
-                        <div class="col-lg-4 col-md-6 mb-5">
+                    <c:forEach var="libro" items="${libros}"  varStatus="status">
+                        <div class="col-lg-4 col-md-6 mb-5" data-aos="fade-up" data-aos-delay="${status.index * 100}">
                             <div class="row align-items-center">
                                 <div class="col-12">
-                                    <!-- Estado de disponibilidad -->
                                     <c:choose>
                                         <c:when test="${libro.libro.disponible == 1}">
                                             <span class="text-success font-weight-bold">Disponible</span>
@@ -79,10 +86,8 @@
                                         </c:otherwise>
                                     </c:choose>
 
-                                    <!-- Título -->
                                     <h4 class="mt-2">${libro.libro.titulo}</h4>
 
-                                    <!-- Autor y categoría -->
                                     <p>Autor: ${libro.autor.nombres} ${libro.autor.apellidos} | Categoría: ${libro.libro.categoria.nombre}</p>
                                 </div>
                             </div>
@@ -98,16 +103,16 @@
         <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
             <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
 
-                <div class="col-lg-3 col-md-6 mb-5">
+                <!-- CONTACTO -->
+                <div class="col-lg-3 col-md-6 mb-5" data-aos="fade-up">
                     <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Contáctanos</h4>
                     <p><i class="fa fa-map-marker-alt mr-2"></i>SENA - Centro de Formación</p>
                     <p><i class="fa fa-phone-alt mr-2"></i>+57 300 000 0000</p>
                     <p class="m-0"><i class="fa fa-envelope mr-2"></i>bibliosena@sena.edu.co</p>
                 </div>
 
-
-
-                <div class="col-lg-3 col-md-6 mb-5">
+                <!-- HORARIOS -->
+                <div class="col-lg-3 col-md-6 mb-5" data-aos="fade-up" data-aos-delay="200">
                     <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Horarios</h4>
                     <div>
                         <h6 class="text-white text-uppercase">Lunes - Viernes</h6>
@@ -119,11 +124,13 @@
                     </div>
                 </div>
 
-
-
             </div>
 
-            <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
+            <!-- COPYRIGHT -->
+            <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5"
+                 style="border-color: rgba(256, 256, 256, .1) !important;"
+                 data-aos="fade-up" data-aos-delay="400">
+
                 <p class="mb-2 text-white">
                     Copyright &copy; <a class="font-weight-bold" href="#">BIBLIOSENA</a>. Todos los derechos reservados.
                 </p>
@@ -146,6 +153,14 @@
         <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
         <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
         <script src="js/main.js"></script>
+        <!-- AO -->
+        <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                duration: 1000,
+                once: true
+            });
+        </script>
     </body>
 
 </html>

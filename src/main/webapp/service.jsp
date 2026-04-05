@@ -8,6 +8,8 @@
         <meta content="Free Website Template" name="keywords">
         <meta content="Free Website Template" name="description">
 
+        <!-- Animacion AO-->
+        <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
         <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
 
@@ -27,7 +29,7 @@
     </head>
 
     <body>
-       <!-- Navbar Start -->
+        <!-- Navbar Start -->
         <div class="container-fluid p-0 nav-bar">
             <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
                 <a href="index.jsp" class="navbar-brand px-lg-4 m-0">
@@ -42,6 +44,7 @@
                         <a href="about.jsp" class="nav-item nav-link">Nosotros</a>
                         <a href="service.jsp" class="nav-item nav-link active">Servicios</a>
                         <a href="librosDisponiblesServlet" class="nav-item nav-link">Catalogo Libros</a>
+                        <a href="extras.jsp" class="nav-item nav-link">EXTRAS</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu text-capitalize">
@@ -61,8 +64,8 @@
         <!-- Page Header Start -->
         <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
             <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
-                <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Servicios</h1>
-                <div class="d-inline-flex mb-lg-5">
+                <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase" data-aos="fade-down" data-aos-duration="1200">Servicios</h1>
+                <div class="d-inline-flex mb-lg-5" data-aos="fade-up" data-aos-delay="200">
                     <p class="m-0 text-white"><a class="text-white" href="">Inicio</a></p>
                     <p class="m-0 text-white px-2">/</p>
                     <p class="m-0 text-white">Servicios</p>
@@ -75,13 +78,13 @@
         <!-- Service Start -->
         <div class="container-fluid pt-5">
             <div class="container">
-                <div class="section-title">
+                <div class="section-title" data-aos="fade-up">
                     <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Servicios</h4>
                     <h1 class="display-4">Gestión de Biblioteca</h1>
                 </div>
                 <div class="row">
 
-                    <div class="col-lg-6 mb-5">
+                    <div class="col-lg-6 mb-5" data-aos="fade-right">
                         <div class="row align-items-center">
                             <div class="col-sm-5">
                                 <img class="img-fluid mb-3 mb-sm-0" src="img/service-1.jpg" alt="">
@@ -95,7 +98,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6 mb-5">
+                    <div class="col-lg-6 mb-5" data-aos="fade-left" data-aos-delay="200">
                         <div class="row align-items-center">
                             <div class="col-sm-5">
                                 <img class="img-fluid mb-3 mb-sm-0" src="img/service-2.png" alt="">
@@ -109,9 +112,7 @@
                         </div>
                     </div>
 
-      
-
-                    <div class="col-lg-6 mb-5">
+                    <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="300">
                         <div class="row align-items-center">
                             <div class="col-sm-5">
                                 <img class="img-fluid mb-3 mb-sm-0" src="img/service-4.png" alt="">
@@ -135,16 +136,16 @@
         <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
             <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
 
-                <div class="col-lg-3 col-md-6 mb-5">
+                <!-- CONTACTO -->
+                <div class="col-lg-3 col-md-6 mb-5" data-aos="fade-up">
                     <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Contáctanos</h4>
                     <p><i class="fa fa-map-marker-alt mr-2"></i>SENA - Centro de Formación</p>
                     <p><i class="fa fa-phone-alt mr-2"></i>+57 300 000 0000</p>
                     <p class="m-0"><i class="fa fa-envelope mr-2"></i>bibliosena@sena.edu.co</p>
                 </div>
 
-
-
-                <div class="col-lg-3 col-md-6 mb-5">
+                <!-- HORARIOS -->
+                <div class="col-lg-3 col-md-6 mb-5" data-aos="fade-up" data-aos-delay="200">
                     <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Horarios</h4>
                     <div>
                         <h6 class="text-white text-uppercase">Lunes - Viernes</h6>
@@ -156,11 +157,13 @@
                     </div>
                 </div>
 
-
-
             </div>
 
-            <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
+            <!-- COPYRIGHT -->
+            <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5"
+                 style="border-color: rgba(256, 256, 256, .1) !important;"
+                 data-aos="fade-up" data-aos-delay="400">
+
                 <p class="mb-2 text-white">
                     Copyright &copy; <a class="font-weight-bold" href="#">BIBLIOSENA</a>. Todos los derechos reservados.
                 </p>
@@ -192,6 +195,14 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <!-- AO -->
+        <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                duration: 1000,
+                once: true
+            });
+        </script>
     </body>
 
 </html>

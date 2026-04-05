@@ -9,14 +9,20 @@
 
         <link href="img/favicon.ico" rel="icon">
 
+        <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
 
+        <!-- Font Awesome -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
+        <!-- AOS Animaciones -->
+        <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+        <!-- CSS -->
         <link href="css/style.css" rel="stylesheet">
     </head>
 
-    <body>
+    <body class="loaded">
 
         <!-- Navbar Start -->
         <div class="container-fluid p-0 nav-bar">
@@ -33,13 +39,14 @@
                         <a href="about.jsp" class="nav-item nav-link">Nosotros</a>
                         <a href="service.jsp" class="nav-item nav-link">Servicios</a>
                         <a href="librosDisponiblesServlet" class="nav-item nav-link">Catalogo Libros</a>
+                        <a href="extras.jsp" class="nav-item nav-link">EXTRAS</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu text-capitalize">
                                 <a href="registroPrestamoServlet" class="dropdown-item">Registro Prestamos</a>
                                 <a href="listaP.jsp" class="dropdown-item">Prestamos</a>
                                 <a href="login.jsp" class="dropdown-item">Login</a>
-                                <a href="login.jsp" class="dropdown-item">Registro</a>
+                                <a href="registro.jsp" class="dropdown-item">Registro</a>
                                 <a href="index.jsp" class="dropdown-item">Cerrar sesion</a>
                             </div>
                         </div>
@@ -50,21 +57,21 @@
         <!-- Navbar End -->
 
         <!-- HEADER -->
-        <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+        <div class="container-fluid page-header mb-5 position-relative overlay-bottom" data-aos="fade-down">
             <div class="d-flex flex-column align-items-center justify-content-center pt-5">
-                <h1 class="display-3 text-white">Prestamos</h1>
-                <h4 class="text-white">Consulta tus Prestamos</h4>
+                <h1 class="display-3 text-white" data-aos="fade-down" data-aos-duration="1200">Prestamos</h1>
+                <h4 class="text-white" data-aos="fade-up" data-aos-delay="200">Consulta tus Prestamos</h4>
             </div>
         </div>
 
         <!-- TABLA -->
         <div class="container py-5">
-            <div class="section-title text-center">
+            <div class="section-title text-center" data-aos="fade-up">
                 <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Sistema</h4>
                 <h1 class="display-4">Prestamos del Usuario</h1>
             </div>
 
-            <div class="table-responsive">
+            <div class="table-responsive" data-aos="zoom-in">
                 <table class="table table-hover text-center">
                     <thead class="bg-primary text-white">
                         <tr>
@@ -83,7 +90,7 @@
 
                             <c:when test="${not empty prestamos}">
                                 <c:forEach var="m" items="${prestamos}">
-                                    <tr>
+                                    <tr data-aos="fade-up" data-aos-delay="${m.idPrestamo * 50}">
                                         <td>${m.idPrestamo}</td>
                                         <td>${m.usuario.nombre}</td>
                                         <td>${m.libro.titulo}</td>
@@ -101,7 +108,7 @@
                             </c:when>
 
                             <c:otherwise>
-                                <tr>
+                                <tr data-aos="fade-up">
                                     <td colspan="7">No hay préstamos registrados</td>
                                 </tr>
                             </c:otherwise>
@@ -112,13 +119,14 @@
             </div>
         </div>
 
-        <!-- BUSCADOR (SOLO ADMIN, PERO SE DEJA) -->
+        <!-- BUSCADOR -->
         <div class="container-fluid my-5">
             <div class="container">
-                <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
+                <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);" data-aos="zoom-in-up">
                     <h1 class="text-white mb-4">Buscar Prestamos</h1>
 
-                    <form action="listaPrestamoServlet" method="GET">
+                    <!-- ⚠️ CORREGIDO -->
+                    <form action="listaPrestamosServlet" method="GET">
                         <div class="form-group">
                             <input type="text" name="usuario"
                                    class="form-control bg-transparent border-primary p-4"
@@ -134,14 +142,24 @@
         </div>
 
         <!-- FOOTER -->
-        <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
+        <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top" data-aos="fade-up">
             <div class="text-center text-white py-4">
                 <p>© BIBLIOSENA - Sistema de Biblioteca</p>
             </div>
         </div>
 
+        <!-- JS -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+        <!-- AOS -->
+        <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                duration: 1000,
+                once: true
+            });
+        </script>
 
     </body>
 </html>

@@ -45,7 +45,13 @@ public class registroPrestamoServlet extends HttpServlet {
         int idLibro = 0;
         idLibro = Integer.parseInt(libro);
         String fechaE = request.getParameter("fechaDevolucion");
-        Date fechaEsperada = Date.valueOf(fechaE);
+        Date fechaEsperada = null;
+        try {
+            fechaEsperada = Date.valueOf(fechaE);
+
+        } catch (Exception e) {
+            System.out.println("Formato de fecha invalido: " + fechaE);
+        }
         String usuario = (String) sesion.getAttribute("usuario");
         UsuarioDaoImpl buscar = new UsuarioDaoImpl();
         int idUsuario = buscar.buscarId(usuario);

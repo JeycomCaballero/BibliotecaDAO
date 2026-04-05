@@ -81,8 +81,9 @@ public class PrestamoDAOImpl implements PrestamoDAO {
     public boolean registrarPrestamo(ClPrestamo p) {
 
         String sql = "insert into prestamo(fechaprestamo, fechadevolucionesperada, fechadevolucionreal, estado, idlibro, idusuario) values (?,?,?,?,?,?)";
+        String sql2 = "update libro set disponible = 0 where idLibro = ?";
 
-        try (Connection cn = conexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(sql)) {
+        try (Connection cn = conexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(sql); PreparedStatement ps2 = cn.prepareStatement(sql2)) {
 
             ps.setDate(1, p.getFechaPrestamo());
             ps.setDate(2, p.getFechaDevolucionEsperada());
@@ -90,8 +91,10 @@ public class PrestamoDAOImpl implements PrestamoDAO {
             ps.setInt(4, p.getEstado());
             ps.setInt(5, p.getLibro().getId());
             ps.setInt(6, p.getUsuario().getId());
-
             ps.executeUpdate();
+            ps2.setInt(1, p.getLibro().getId());
+            ps2.executeUpdate();
+
             return true;
 
         } catch (SQLException e) {

@@ -12,5 +12,5 @@ public interface AutorDAO {
     boolean eliminarAutor(String nombre);
 
     ClAutor buscarAutor(String nombre);
-
+    List<ClAutor> listarTodos ();
 }

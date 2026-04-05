@@ -26,8 +26,8 @@ public class LibroAutorDAOImpl implements LibroAutorDAO {
                 + "a.idAutor, a.nombres AS autorNombres, a.apellidos AS autorApellidos, a.nacionalidad AS autorNac, a.fechaNacimiento AS autorFecha, "
                 + "la.idAutorLibro "
                 + "FROM libro l "
-                + "INNER JOIN libro_autor la ON l.idLibro = la.idLibro "
-                + "INNER JOIN autor a ON la.idAutor = a.idAutor "
+                + "LEFT JOIN libro_autor la ON l.idLibro = la.idLibro "
+                + "LEFT JOIN autor a ON la.idAutor = a.idAutor "
                 + "INNER JOIN categoria c ON l.idCategoria = c.idCategoria "
                 + "INNER JOIN editorial e ON l.idEditorial = e.idEditorial";
 
@@ -42,6 +42,35 @@ public class LibroAutorDAOImpl implements LibroAutorDAO {
 
         return lista;
     }
+
+    @Override
+    public ClLibroAutor listarPorId(int id) {
+
+        String sql = "SELECT "
+                + "l.idLibro, l.titulo, l.isbn, l.añoPublicacion, l.numPaginas, l.disponible, l.idEditorial, l.idCategoria, "
+                + "e.nombre AS editorialNombre, e.pais AS editorialPais, e.sitioWeb AS editorialWeb, "
+                + "c.idCategoria AS catId, c.nombre AS catNombre, c.descripcion AS catDesc, "
+                + "a.idAutor, a.nombres AS autorNombres, a.apellidos AS autorApellidos, a.nacionalidad AS autorNac, a.fechaNacimiento AS autorFecha, "
+                + "la.idAutorLibro "
+                + "FROM libro l "
+                + "LEFT JOIN libro_autor la ON l.idLibro = la.idLibro "
+                + "LEFT JOIN autor a ON la.idAutor = a.idAutor "
+                + "INNER JOIN categoria c ON l.idCategoria = c.idCategoria "
+                + "INNER JOIN editorial e ON l.idEditorial = e.idEditorial where l.idLibro = ?";
+
+        try (Connection cn = conexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return mapear(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    
 
     private ClLibroAutor mapear(ResultSet rs) throws SQLException {
         ClEditorial editorial = new ClEditorial(
@@ -77,7 +106,7 @@ public class LibroAutorDAOImpl implements LibroAutorDAO {
         );
 
         return new ClLibroAutor(
-                rs.getInt("idAutorLibro"), 
+                rs.getInt("idAutorLibro"),
                 libro,
                 autor
         );
