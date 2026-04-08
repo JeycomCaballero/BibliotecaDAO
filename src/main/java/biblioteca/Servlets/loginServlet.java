@@ -46,9 +46,9 @@ public class loginServlet extends HttpServlet {
             
             sesion.setAttribute("rol", rol);
             sesion.setAttribute("usuario", nombre);
-            response.sendRedirect("librosDisponiblesIndexServlet");
+            response.sendRedirect("librosDisponiblesIndexServlet?success=ok");
         }else{
-            request.setAttribute("Error", "usuario o contraseña invalida");
+            request.setAttribute("error", "usuario o contraseña invalida");
             request.getRequestDispatcher("login.jsp").forward(request, response);
        }
         

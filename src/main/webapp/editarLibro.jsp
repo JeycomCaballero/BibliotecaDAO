@@ -58,35 +58,45 @@
 
                         <div class="card-body">
 
-                            <form action="editarLibroServlet" method="POST">
+                            <form action="editarLibroServlet" method="POST" enctype="multipart/form-data">
 
                                 <input type="hidden" name="id" value="${libro.libro.id}">
 
                                 <div class="form-group">
+                                    <label class="form-label">Titulo del Libro</label>
+
                                     <input type="text" name="titulo" class="form-control p-3"
                                            placeholder="Título"
                                            value="${libro.libro.titulo}" required>
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="form-label">ISBN Libro</label>
+
                                     <input type="text" name="isbn" class="form-control p-3"
                                            placeholder="ISBN"
                                            value="${libro.libro.isbn}">
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="form-label">Numero de Paginas</label>
+
                                     <input type="number" name="paginas" class="form-control p-3"
                                            placeholder="Número de páginas"
                                            value="${libro.libro.numeroPaginas}">
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="form-label">Seleccionar año del Libro</label>
+
                                     <input type="date" name="anio" class="form-control p-3"
                                            value="${libro.libro.añoL}">
                                 </div>
 
                                 <!-- SELECTS CON SELECT2 -->
                                 <div class="form-group">
+                                    <label class="form-label">Seleccionar Categoria</label>
+
                                     <select name="idCategoria" class="form-control select2">
                                         <c:forEach var="c" items="${categorias}">
                                             <option value="${c.id}" ${c.id == libro.libro.categoria.id ? "selected" : ""}>
@@ -97,6 +107,8 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="form-label">Seleccionar Editorial</label>
+
                                     <select name="idEditorial" class="form-control select2">
                                         <c:forEach var="e" items="${editoriales}">
                                             <option value="${e.id}" ${e.id == libro.libro.editorial.id ? "selected" : ""}>
@@ -107,6 +119,8 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="form-label">Seleccionar Autor</label>
+
                                     <select name="idAutor" class="form-control select2">
                                         <c:forEach var="a" items="${autores}">
                                             <option value="${a.id}" ${a.id == libro.autor.id ? "selected" : ""}>
@@ -117,10 +131,24 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="form-label">Seleccionar Disponilidad</label>
+
                                     <select name="disponible" class="form-control select2">
                                         <option value="1" ${libro.libro.disponible == 1 ? "selected" : ""}>Disponible</option>
                                         <option value="0" ${libro.libro.disponible == 0 ? "selected" : ""}>No disponible</option>
                                     </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Imagen Actual</label>
+                                    <input type="hidden" name="imagenUrl" id="imagenUrl" value="src.jpg">
+                                    <img id="imagen" src="img.png" width="100" height="100" alt="imagen no encontrada"/>
+                                    <label class="form-label">Cambiar Imagen</label>
+
+                                    <label for="file-upload" class="custom-file-upload">
+                                        Seleccionar archivo
+                                    </label>
+                                    <input id="file-upload" type="file" name="imagen"/>
                                 </div>
 
                                 <div class="text-center mt-4">

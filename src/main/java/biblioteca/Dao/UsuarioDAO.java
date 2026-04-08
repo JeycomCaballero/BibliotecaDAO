@@ -10,6 +10,7 @@ public interface UsuarioDAO {
     boolean registrarUsuario (ClUsuario u);
     ClUsuario buscarUsuario (int id);
     boolean actualizarUsuario (ClUsuario u);
+    boolean actualizarUsuarioA (ClUsuario u);
     boolean eliminarUsuario (int id);
     boolean verificarLogin (String nombre, String contraseña);
     String  buscarRol (String correo);

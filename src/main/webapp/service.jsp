@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,26 +37,58 @@
                 <a href="index.jsp" class="navbar-brand px-lg-4 m-0">
                     <h1 class="m-0 display-4 text-uppercase text-white">BIBLIOSENA</h1>
                 </a>
+
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav ml-auto p-4">
-                        <a href="librosDisponiblesIndexServlet" class="nav-item nav-link ">Inicio</a>
+
+                        <!-- SIEMPRE -->
+                        <a href="librosDisponiblesIndexServlet" class="nav-item nav-link">Inicio</a>
                         <a href="about.jsp" class="nav-item nav-link">Nosotros</a>
-                        <a href="service.jsp" class="nav-item nav-link active">Servicios</a>
+                        <a href="service.jsp" class="nav-item nav-link">Servicios</a>
                         <a href="librosDisponiblesServlet" class="nav-item nav-link">Catalogo Libros</a>
-                        <a href="extras.jsp" class="nav-item nav-link">EXTRAS</a>
+
+                        <!-- SOLO ADMIN -->
+                        <c:if test="${not empty sessionScope.usuario && sessionScope.rol == 'ADMIN'}">
+                            <a href="extras.jsp" class="nav-item nav-link">EXTRAS</a>
+                        </c:if>
+
+                        <!-- DROPDOWN -->
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu text-capitalize">
-                                <a href="registroPrestamoServlet" class="dropdown-item">Registro Prestamos</a>
-                                <a href="listaP.jsp" class="dropdown-item">Prestamos</a>
-                                <a href="login.jsp" class="dropdown-item">Login</a>
-                                <a href="registro.jsp" class="dropdown-item">Registro</a>
-                                <a href="index.jsp" class="dropdown-item">Cerrar sesion</a>
+
+                                <!-- NO LOGUEADO -->
+                                <c:if test="${empty sessionScope.usuario}">
+                                    <a href="login.jsp" class="dropdown-item">Login</a>
+                                    <a href="registro.jsp" class="dropdown-item">Registro</a>
+                                </c:if>
+
+                                <!-- LOGUEADO (ADMIN Y USER) -->
+                                <c:if test="${not empty sessionScope.usuario}">
+
+                                    <!-- TODOS LOS USUARIOS -->
+                                    <a href="registroPrestamoServlet" class="dropdown-item">Registro Prestamos</a>
+                                    <a href="listaPrestamoServlet" class="dropdown-item">Prestamos</a>
+
+                                    <!-- CERRAR SESION -->
+                                    <a href="logoutServlet" class="dropdown-item">Cerrar sesi贸n</a>
+
+                                </c:if>
+
                             </div>
                         </div>
+
+                        <!-- MOSTRAR USUARIO -->
+                        <c:if test="${not empty sessionScope.usuario}">
+                            <span class="nav-item nav-link text-white">
+                                馃懁 ${sessionScope.usuario}
+                            </span>
+                        </c:if>
+
                     </div>
                 </div>
             </nav>
@@ -80,7 +114,7 @@
             <div class="container">
                 <div class="section-title" data-aos="fade-up">
                     <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Servicios</h4>
-                    <h1 class="display-4">Gesti髇 de Biblioteca</h1>
+                    <h1 class="display-4">Gesti贸n de Biblioteca</h1>
                 </div>
                 <div class="row">
 
@@ -90,9 +124,9 @@
                                 <img class="img-fluid mb-3 mb-sm-0" src="img/service-1.jpg" alt="">
                             </div>
                             <div class="col-sm-7">
-                                <h4><i class="fa fa-book service-icon"></i>Pr閟tamo de Libros</h4>
+                                <h4><i class="fa fa-book service-icon"></i>Pr茅stamo de Libros</h4>
                                 <p class="m-0">
-                                    Permite a los usuarios solicitar libros disponibles del cat醠ogo y gestionar sus pr閟tamos de manera r醦ida y sencilla.
+                                    Permite a los usuarios solicitar libros disponibles del cat谩logo y gestionar sus pr茅stamos de manera r谩pida y sencilla.
                                 </p>
                             </div>
                         </div>
@@ -104,9 +138,9 @@
                                 <img class="img-fluid mb-3 mb-sm-0" src="img/service-2.png" alt="">
                             </div>
                             <div class="col-sm-7">
-                                <h4><i class="fa fa-user service-icon"></i>Gesti髇 de Usuarios</h4>
+                                <h4><i class="fa fa-user service-icon"></i>Gesti贸n de Usuarios</h4>
                                 <p class="m-0">
-                                    Registro y administraci髇 de usuarios con roles, permitiendo controlar el acceso al sistema.
+                                    Registro y administraci贸n de usuarios con roles, permitiendo controlar el acceso al sistema.
                                 </p>
                             </div>
                         </div>
@@ -118,9 +152,9 @@
                                 <img class="img-fluid mb-3 mb-sm-0" src="img/service-4.png" alt="">
                             </div>
                             <div class="col-sm-7">
-                                <h4><i class="fa fa-database service-icon"></i>Administraci髇 de Datos</h4>
+                                <h4><i class="fa fa-database service-icon"></i>Administraci贸n de Datos</h4>
                                 <p class="m-0">
-                                    Los administradores pueden gestionar libros, autores, categor韆s y editoriales dentro del sistema.
+                                    Los administradores pueden gestionar libros, autores, categor铆as y editoriales dentro del sistema.
                                 </p>
                             </div>
                         </div>
@@ -138,8 +172,8 @@
 
                 <!-- CONTACTO -->
                 <div class="col-lg-3 col-md-6 mb-5" data-aos="fade-up">
-                    <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Cont醕tanos</h4>
-                    <p><i class="fa fa-map-marker-alt mr-2"></i>SENA - Centro de Formaci髇</p>
+                    <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Cont谩ctanos</h4>
+                    <p><i class="fa fa-map-marker-alt mr-2"></i>SENA - Centro de Formaci贸n</p>
                     <p><i class="fa fa-phone-alt mr-2"></i>+57 300 000 0000</p>
                     <p class="m-0"><i class="fa fa-envelope mr-2"></i>bibliosena@sena.edu.co</p>
                 </div>
@@ -150,7 +184,7 @@
                     <div>
                         <h6 class="text-white text-uppercase">Lunes - Viernes</h6>
                         <p>8:00 AM - 6:00 PM</p>
-                        <h6 class="text-white text-uppercase">S醔ado</h6>
+                        <h6 class="text-white text-uppercase">S谩bado</h6>
                         <p>8:00 AM - 2:00 PM</p>
                         <h6 class="text-white text-uppercase">Domingo</h6>
                         <p>Cerrado</p>
@@ -168,7 +202,7 @@
                     Copyright &copy; <a class="font-weight-bold" href="#">BIBLIOSENA</a>. Todos los derechos reservados.
                 </p>
                 <p class="m-0 text-white">
-                    Sistema de gesti髇 de biblioteca desarrollado para el SENA
+                    Sistema de gesti贸n de biblioteca desarrollado para el SENA
                 </p>
             </div>
         </div>

@@ -36,26 +36,60 @@
                 <a href="index.jsp" class="navbar-brand px-lg-4 m-0">
                     <h1 class="m-0 display-4 text-uppercase text-white">BIBLIOSENA</h1>
                 </a>
+
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav ml-auto p-4">
-                        <a href="librosDisponiblesIndexServlet" class="nav-item nav-link ">Inicio</a>
+
+                        <!-- SIEMPRE -->
+                        <a href="librosDisponiblesIndexServlet" class="nav-item nav-link">Inicio</a>
                         <a href="about.jsp" class="nav-item nav-link">Nosotros</a>
                         <a href="service.jsp" class="nav-item nav-link">Servicios</a>
                         <a href="librosDisponiblesServlet" class="nav-item nav-link">Catalogo Libros</a>
-                        <a href="extras.jsp" class="nav-item nav-link">EXTRAS</a>
+
+                        <!-- EXTRAS SOLO ADMIN -->
+                        <c:if test="${not empty sessionScope.usuario && sessionScope.rol == 'ADMIN'}">
+                            <a href="extras.jsp" class="nav-item nav-link">EXTRAS</a>
+                        </c:if>
+
+                        <!-- DROPDOWN -->
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu text-capitalize">
-                                <a href="registroPrestamoServlet" class="dropdown-item">Registro Prestamos</a>
-                                <a href="listaP.jsp" class="dropdown-item">Prestamos</a>
-                                <a href="login.jsp" class="dropdown-item">Login</a>
-                                <a href="registro.jsp" class="dropdown-item">Registro</a>
-                                <a href="index.jsp" class="dropdown-item">Cerrar sesion</a>
+
+                                <!-- SI NO HAY SESION -->
+                                <c:if test="${empty sessionScope.usuario}">
+                                    <a href="login.jsp" class="dropdown-item">Login</a>
+                                    <a href="registro.jsp" class="dropdown-item">Registro</a>
+                                </c:if>
+
+                                <!-- SI HAY SESION -->
+                                <c:if test="${not empty sessionScope.usuario}">
+
+                                    <!-- SOLO ADMIN -->
+                                    <c:if test="${sessionScope.rol == 'ADMIN'}">
+                                        <a href="registroPrestamoServlet" class="dropdown-item">Registro Prestamos</a>
+                                        <a href="listaPrestamoServlet" class="dropdown-item">Prestamos</a>
+                                    </c:if>
+
+                                    <!-- CERRAR SESION -->
+                                    <a href="logoutServlet" class="dropdown-item">Cerrar sesión</a>
+
+                                </c:if>
+
                             </div>
                         </div>
+
+                        <!-- OPCIONAL: MOSTRAR USUARIO -->
+                        <c:if test="${not empty sessionScope.usuario}">
+                            <span class="nav-item nav-link text-white">
+                                👤 ${sessionScope.usuario}
+                            </span>
+                        </c:if>
+
                     </div>
                 </div>
             </nav>
@@ -107,8 +141,11 @@
                                         <select name="libro" id="libroSelect" class="form-control select2" required>
                                             <option value="">Buscar libro...</option>
                                             <c:forEach var="libro" items="${libros}">
-                                                <option value="${libro.libro.id}">
-                                                    ${libro.libro.titulo}
+                                                <option value="${libro.libro.id}" 
+                                                        data-disponible="${libro.libro.disponible}"
+                                                        ${libro.libro.disponible == 0 ? "disabled" : ""}>
+                                                    ${libro.libro.titulo} 
+                                                    ${libro.libro.disponible == 0 ? "(No disponible)" : ""}
                                                 </option>
                                             </c:forEach>
                                         </select>
@@ -143,16 +180,26 @@
             </div>
         </div>
 
-        <!-- JS -->
+        <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-
-        <!-- Select2 -->
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/tempusdominus/js/moment.min.js"></script>
+        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
+        <!-- Contact Javascript File -->
+        <script src="mail/jqBootstrapValidation.min.js"></script>
+        <script src="mail/contact.js"></script>
 
-        <!-- AOS -->
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
+        <!-- AO -->
         <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
         <script>
             AOS.init({

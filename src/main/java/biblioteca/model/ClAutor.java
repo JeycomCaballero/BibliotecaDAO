@@ -10,6 +10,10 @@ public class ClAutor {
     String nacionalidad;
     Date fechaNacimiento;
 
+    public ClAutor() {
+    }
+    
+
     public ClAutor(int id,String nombres, String apellidos, String nacionalidad, Date fechaNacimiento) {
 
         this.id = id;

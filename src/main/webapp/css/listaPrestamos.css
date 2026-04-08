@@ -1,0 +1,72 @@
+
+
+.tabla-prestamos-box {
+    background: rgba(51, 33, 29, 0.85);
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.tabla-prestamos {
+    color: white;
+}
+
+.tabla-prestamos thead {
+    background: #d4a762;
+    color: black;
+}
+
+.tabla-prestamos th {
+    border: none;
+    padding: 15px;
+}
+
+.tabla-prestamos td {
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+
+.tabla-prestamos tbody tr:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+
+.estado {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.estado.activo {
+    background: #28a745;
+    color: white;
+}
+
+.estado.devuelto {
+    background: #6c757d;
+    color: white;
+}
+
+
+
+.buscador-prestamos {
+    background: rgba(51, 33, 29, 0.85);
+    padding: 40px;
+    border-radius: 15px;
+}
+
+.buscador-input {
+    background: transparent;
+    border: 2px solid #d4a762;
+    color: white;
+}
+
+.buscador-input::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+
+.buscador-input:focus {
+    background: transparent;
+    color: white;
+    border-color: white;
+    box-shadow: none;
+}

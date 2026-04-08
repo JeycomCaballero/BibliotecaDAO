@@ -8,110 +8,105 @@ import java.util.List;
 
 public class AutorDAOImpl implements AutorDAO {
 
-    PreparedStatement pm;
-
     @Override
     public List<ClAutor> listarTodos() {
+
         List<ClAutor> lista = new ArrayList<>();
-        String sql = "select * from autor";
-        try (Connection cn = conexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(sql);ResultSet rs = ps.executeQuery()){
+        String sql = "SELECT * FROM autor";
+
+        try (Connection cn = conexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+
             while (rs.next()) {
                 lista.add(mapear(rs));
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return lista;
     }
-    
-    
 
     @Override
-    public boolean registrarAutor(ClAutor autorR) {
-        Connection con = conexionBD.conectar();
+    public boolean registrarAutor(ClAutor a) {
 
-        String consulta = "insert into autor (nombres,apellidos,nacionalidad,fechaNacimiento) values (?,?,?,?)";
-        try {
-            pm = con.prepareStatement(consulta);
-            pm.setString(1, autorR.getNombres());
-            pm.setString(2, autorR.getApellidos());
-            pm.setString(3, autorR.getNacionalidad());
-            pm.setDate(4, autorR.getFechaNacimiento());
-            pm.executeUpdate();
-            pm.close();
-            con.close();
+        String sql = "INSERT INTO autor (nombres, apellidos, nacionalidad, fechaNacimiento) VALUES (?,?,?,?)";
+
+        try (Connection cn = conexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(sql)) {
+
+            ps.setString(1, a.getNombres());
+            ps.setString(2, a.getApellidos());
+            ps.setString(3, a.getNacionalidad());
+            ps.setDate(4, a.getFechaNacimiento());
+
+            ps.executeUpdate();
+            return true;
 
         } catch (SQLException e) {
-            System.out.println("Error al registrar autor");
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     @Override
-    public boolean eliminarAutor(String nombre) {
-        Connection con = conexionBD.conectar();
+    public boolean eliminarAutor(int id) {
 
-        String consulta = "delete from autor where nombres = ?";
-        try {
-            pm = con.prepareStatement(consulta);
-            pm.setString(1, nombre);
-            pm.executeUpdate();
-            pm.close();
-            con.close();
+        String sql = "DELETE FROM autor WHERE idAutor = ?";
+
+        try (Connection cn = conexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            return true;
+
         } catch (SQLException e) {
-            System.out.println("Error eliminando autor");
             e.printStackTrace();
+            return false;
         }
-        return false;
-
     }
 
     @Override
-    public boolean actualizarAutor(ClAutor autorR, String nombre2) {
-        Connection con = conexionBD.conectar();
+    public boolean actualizarAutor(ClAutor a) {
 
-        String consulta = "update autor set nombres = ?, apellidos = ? where nombres = ?";
-        try {
-            pm = con.prepareStatement(consulta);
-            pm.setString(1, autorR.getNombres());
-            pm.setString(2, autorR.getApellidos());
-            pm.setString(3, nombre2);
-            pm.executeUpdate();
-            pm.close();
-            con.close();
+        String sql = "UPDATE autor SET nombres=?, apellidos=?, nacionalidad=?, fechaNacimiento=? WHERE idAutor=?";
+
+        try (Connection cn = conexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(sql)) {
+
+            ps.setString(1, a.getNombres());
+            ps.setString(2, a.getApellidos());
+            ps.setString(3, a.getNacionalidad());
+            ps.setDate(4, a.getFechaNacimiento());
+            ps.setInt(5, a.getId());
+
+            ps.executeUpdate();
+            return true;
+
         } catch (SQLException e) {
-            System.out.println("Error actualizando autor");
             e.printStackTrace();
+            return false;
         }
-        return false;
-
     }
 
     @Override
-    public ClAutor buscarAutor(String nombre) {
-        Connection con = conexionBD.conectar();
-        ClAutor autor = null;
+    public ClAutor buscarAutor(int id) {
 
-        String consulta = "select nombres, apellidos, nacionalidad from autor where nombres = ?";
-        try {
-            pm = con.prepareStatement(consulta);
-            pm.setString(1, nombre);
-            ResultSet rs = pm.executeQuery();
-            if (rs.next()) {
+        String sql = "SELECT * FROM autor WHERE idAutor = ?";
 
-                autor = mapear(rs);
+        try (Connection cn = conexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(sql)) {
 
-            } else {
-                System.out.println("Autor no encontrado");
+            ps.setInt(1, id);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return mapear(rs);
+                }
             }
-            pm.close();
-            con.close();
+
         } catch (SQLException e) {
-            System.out.println("Error buscando autor");
             e.printStackTrace();
         }
-        return autor;
+
+        return null;
     }
 
     private ClAutor mapear(ResultSet rs) throws SQLException {
@@ -123,5 +118,4 @@ public class AutorDAOImpl implements AutorDAO {
                 rs.getDate("fechaNacimiento")
         );
     }
-
 }

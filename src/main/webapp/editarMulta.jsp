@@ -1,0 +1,119 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Editar Multa - BIBLIOSENA</title>
+
+        <!-- AOS -->
+        <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+        <!-- Bootstrap -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- CSS -->
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/diseñoER.css" rel="stylesheet">
+    </head>
+    <body class="loaded">
+
+        <!-- NAVBAR -->
+        <div class="container-fluid p-0 nav-bar">
+            <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
+                <a href="index.jsp" class="navbar-brand px-lg-4 m-0">
+                    <h1 class="m-0 display-4 text-uppercase text-white">BIBLIOSENA</h1>
+                </a>
+            </nav>
+        </div>
+
+        <!-- HEADER -->
+        <div class="container-fluid page-header mb-5 position-relative overlay-bottom" data-aos="fade-down">
+            <div class="d-flex flex-column align-items-center justify-content-center pt-5">
+                <h1 class="display-3 text-white">Editar Multa</h1>
+                <h4 class="text-white">Modifica la información</h4>
+            </div>
+        </div>
+
+        <!-- FORM -->
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="form-card" data-aos="zoom-in">
+
+                        <div class="card-header">
+                            <h4>Actualizar Datos de la Multa</h4>
+                        </div>
+
+                        <div class="card-body">
+
+                            <form action="editarMultasServlet" method="POST">
+
+                                <!-- ID oculto -->
+                                <input type="hidden" name="idMulta" value="${multa.idMulta}">
+
+                                <!-- MONTO -->
+                                <div class="form-group">
+                                    <label>Monto</label>
+                                    <input type="number" name="monto" class="form-control p-3"
+                                           placeholder="Monto de la multa"
+                                           value="${multa.monto}" required>
+                                </div>
+
+                                <!-- FECHA PAGO -->
+                                <div class="form-group">
+                                    <label>Fecha de Pago</label>
+                                    <input type="date" name="fechaPago" class="form-control p-3"
+                                           value="<c:out value='${multa.fechaPago != null ? multa.fechaPago.toString() : ""}'/>">
+                                </div>
+
+                                <!-- ESTADO -->
+                                <div class="form-group">
+                                    <label>Estado</label>
+                                    <select name="estado" class="form-control p-3">
+                                        <option value="0" <c:if test="${multa.estado == 0}">selected</c:if>>Pendiente</option>
+                                        <option value="1" <c:if test="${multa.estado == 1}">selected</c:if>>Pagada</option>
+                                    </select>
+                                </div>
+
+                                <!-- BOTONES -->
+                                <div class="text-center mt-4">
+                                    <button class="btn btn-primary px-4">
+                                        <i class="fa fa-save"></i> Guardar
+                                    </button>
+
+                                    <a href="listaMultasServlet" class="btn btn-secondary px-4 ml-2">
+                                        Cancelar
+                                    </a>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                duration: 900,
+                once: true
+            });
+        </script>
+
+    </body>
+</html>

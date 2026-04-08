@@ -1,4 +1,3 @@
-// Barra busquedad
 document.addEventListener("DOMContentLoaded", function () {
 
     const buscador = document.getElementById("buscador");

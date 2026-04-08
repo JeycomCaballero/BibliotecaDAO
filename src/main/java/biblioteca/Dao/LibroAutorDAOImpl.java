@@ -20,7 +20,7 @@ public class LibroAutorDAOImpl implements LibroAutorDAO {
         List<ClLibroAutor> lista = new ArrayList<>();
 
         String sql = "SELECT "
-                + "l.idLibro, l.titulo, l.isbn, l.añoPublicacion, l.numPaginas, l.disponible, l.idEditorial, l.idCategoria, "
+                + "l.idLibro, l.titulo, l.isbn, l.añoPublicacion, l.numPaginas, l.disponible, l.idEditorial, l.idCategoria, l.imagen,"
                 + "e.nombre AS editorialNombre, e.pais AS editorialPais, e.sitioWeb AS editorialWeb, "
                 + "c.idCategoria AS catId, c.nombre AS catNombre, c.descripcion AS catDesc, "
                 + "a.idAutor, a.nombres AS autorNombres, a.apellidos AS autorApellidos, a.nacionalidad AS autorNac, a.fechaNacimiento AS autorFecha, "
@@ -47,7 +47,7 @@ public class LibroAutorDAOImpl implements LibroAutorDAO {
     public ClLibroAutor listarPorId(int id) {
 
         String sql = "SELECT "
-                + "l.idLibro, l.titulo, l.isbn, l.añoPublicacion, l.numPaginas, l.disponible, l.idEditorial, l.idCategoria, "
+                + "l.idLibro, l.titulo, l.isbn, l.añoPublicacion, l.numPaginas, l.disponible, l.idEditorial, l.idCategoria, l.imagen,"
                 + "e.nombre AS editorialNombre, e.pais AS editorialPais, e.sitioWeb AS editorialWeb, "
                 + "c.idCategoria AS catId, c.nombre AS catNombre, c.descripcion AS catDesc, "
                 + "a.idAutor, a.nombres AS autorNombres, a.apellidos AS autorApellidos, a.nacionalidad AS autorNac, a.fechaNacimiento AS autorFecha, "
@@ -69,8 +69,25 @@ public class LibroAutorDAOImpl implements LibroAutorDAO {
         }
         return null;
     }
-    
-    
+
+    @Override
+    public boolean actualizar(int l, int au) {
+        String sql = "UPDATE libro_autor SET idAutor = ? WHERE idLibro = ?";
+
+        try (Connection cn = conexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(sql)) {
+
+            ps.setInt(1, au);
+            ps.setInt(2, l);
+
+            int filas = ps.executeUpdate();
+
+            return filas > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     private ClLibroAutor mapear(ResultSet rs) throws SQLException {
         ClEditorial editorial = new ClEditorial(
@@ -94,7 +111,8 @@ public class LibroAutorDAOImpl implements LibroAutorDAO {
                 rs.getInt("numPaginas"),
                 rs.getInt("disponible"),
                 editorial,
-                categoria
+                categoria,
+                rs.getString("imagen")
         );
 
         ClAutor autor = new ClAutor(

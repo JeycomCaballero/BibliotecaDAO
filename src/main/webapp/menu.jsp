@@ -16,35 +16,70 @@
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
         <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
         <link href="css/style.css" rel="stylesheet">
+        <link href="css/cardL.css" rel="stylesheet">
     </head>
 
     <body>
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
         <!-- Navbar Start -->
         <div class="container-fluid p-0 nav-bar">
             <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
                 <a href="index.jsp" class="navbar-brand px-lg-4 m-0">
                     <h1 class="m-0 display-4 text-uppercase text-white">BIBLIOSENA</h1>
                 </a>
+
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav ml-auto p-4">
-                        <a href="librosDisponiblesIndexServlet" class="nav-item nav-link ">Inicio</a>
+
+                        <!-- SIEMPRE -->
+                        <a href="librosDisponiblesIndexServlet" class="nav-item nav-link">Inicio</a>
                         <a href="about.jsp" class="nav-item nav-link">Nosotros</a>
                         <a href="service.jsp" class="nav-item nav-link">Servicios</a>
-                        <a href="librosDisponiblesServlet" class="nav-item nav-link active">Catalogo Libros</a>
-                        <a href="extras.jsp" class="nav-item nav-link">EXTRAS</a>
+                        <a href="librosDisponiblesServlet" class="nav-item nav-link">Catalogo Libros</a>
+
+                        <!-- SOLO ADMIN -->
+                        <c:if test="${not empty sessionScope.usuario && sessionScope.rol == 'ADMIN'}">
+                            <a href="extras.jsp" class="nav-item nav-link">EXTRAS</a>
+                        </c:if>
+
+                        <!-- DROPDOWN -->
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu text-capitalize">
-                                <a href="registroPrestamoServlet" class="dropdown-item">Registro Prestamos</a>
-                                <a href="listaP.jsp" class="dropdown-item">Prestamos</a>
-                                <a href="login.jsp" class="dropdown-item">Login</a>
-                                <a href="registro.jsp" class="dropdown-item">Registro</a>
-                                <a href="index.jsp" class="dropdown-item">Cerrar sesion</a>
+
+                                <!-- NO LOGUEADO -->
+                                <c:if test="${empty sessionScope.usuario}">
+                                    <a href="login.jsp" class="dropdown-item">Login</a>
+                                    <a href="registro.jsp" class="dropdown-item">Registro</a>
+                                </c:if>
+
+                                <!-- LOGUEADO (ADMIN Y USER) -->
+                                <c:if test="${not empty sessionScope.usuario}">
+
+                                    <!-- TODOS LOS USUARIOS -->
+                                    <a href="registroPrestamoServlet" class="dropdown-item">Registro Prestamos</a>
+                                    <a href="listaPrestamoServlet" class="dropdown-item">Prestamos</a>
+
+                                    <!-- CERRAR SESION -->
+                                    <a href="logoutServlet" class="dropdown-item">Cerrar sesión</a>
+
+                                </c:if>
+
                             </div>
                         </div>
+
+                        <!-- MOSTRAR USUARIO -->
+                        <c:if test="${not empty sessionScope.usuario}">
+                            <span class="nav-item nav-link text-white">
+                                👤 ${sessionScope.usuario}
+                            </span>
+                        </c:if>
+
                     </div>
                 </div>
             </nav>
@@ -54,8 +89,8 @@
         <!-- Page Header Start -->
         <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
             <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
-                <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase" data-aos="fade-down" data-aos-duration="1200">Catálogo</h1>
-                <div class="d-inline-flex mb-lg-5" data-aos="fade-up" data-aos-delay="200">
+                <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase" data-aos="fade-down" data-aos-duration="780">Catálogo</h1>
+                <div class="d-inline-flex mb-lg-5" data-aos="fade-up" data-aos-delay="120">
                     <p class="m-0 text-white"><a class="text-white" href="">Inicio</a></p>
                     <p class="m-0 text-white px-2">/</p>
                     <p class="m-0 text-white">Catálogo</p>
@@ -72,25 +107,39 @@
                     <h1 class="display-4">Libros</h1>
                 </div>
                 <div class="row">
-
-                    <c:forEach var="libro" items="${libros}"  varStatus="status">
+                    <c:forEach var="libro" items="${libros}" varStatus="status">
                         <div class="col-lg-4 col-md-6 mb-5" data-aos="fade-up" data-aos-delay="${status.index * 100}">
-                            <div class="row align-items-center">
-                                <div class="col-12">
+
+                            <div class="card-libro">
+
+                                <!-- IMAGEN -->
+                                <img src="${pageContext.request.contextPath}/${libro.libro.imagen}" 
+                                     class="img-libro-custom" alt="Libro">
+
+                                <div class="card-libro-body">
+
+                                    <!-- DISPONIBILIDAD -->
                                     <c:choose>
                                         <c:when test="${libro.libro.disponible == 1}">
-                                            <span class="text-success font-weight-bold">Disponible</span>
+                                            <span class="badge-libro disponible">Disponible</span>
                                         </c:when>
                                         <c:otherwise>
-                                            <span class="text-danger font-weight-bold">No disponible</span>
+                                            <span class="badge-libro no-disponible">No disponible</span>
                                         </c:otherwise>
                                     </c:choose>
 
-                                    <h4 class="mt-2">${libro.libro.titulo}</h4>
+                                    <!-- TITULO -->
+                                    <h5 class="titulo-libro">${libro.libro.titulo}</h5>
 
-                                    <p>Autor: ${libro.autor.nombres} ${libro.autor.apellidos} | Categoría: ${libro.libro.categoria.nombre}</p>
+                                    <!-- INFO -->
+                                    <p class="texto-libro">
+                                        Autor: ${libro.autor.nombres} ${libro.autor.apellidos}<br>
+                                        Categoría: ${libro.libro.categoria.nombre}
+                                    </p>
+
                                 </div>
                             </div>
+
                         </div>
                     </c:forEach>
 

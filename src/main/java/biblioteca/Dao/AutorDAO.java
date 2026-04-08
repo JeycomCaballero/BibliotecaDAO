@@ -1,16 +1,17 @@
 package biblioteca.Dao;
 
-import biblioteca.model.*;
+import biblioteca.model.ClAutor;
 import java.util.List;
 
 public interface AutorDAO {
 
-    boolean  registrarAutor(ClAutor a);
+    List<ClAutor> listarTodos();
 
-    boolean actualizarAutor(ClAutor a, String nombre);
+    boolean registrarAutor(ClAutor a);
 
-    boolean eliminarAutor(String nombre);
+    boolean eliminarAutor(int id);
 
-    ClAutor buscarAutor(String nombre);
-    List<ClAutor> listarTodos ();
+    boolean actualizarAutor(ClAutor a);
+
+    ClAutor buscarAutor(int id);
 }

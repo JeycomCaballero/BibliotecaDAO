@@ -1,0 +1,48 @@
+.card-libro {
+    border-radius: 18px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+.card-libro:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.img-libro-custom {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+}
+.card-libro-body {
+    padding: 15px;
+}
+
+.titulo-libro {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.texto-libro {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.badge-libro {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 0.75rem;
+    border-radius: 10px;
+    color: white;
+}
+
+
+.disponible {
+    background-color: #28a745;
+}
+
+.no-disponible {
+    background-color: #dc3545;
+}

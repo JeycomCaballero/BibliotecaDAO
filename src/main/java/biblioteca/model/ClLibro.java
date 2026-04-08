@@ -12,11 +12,12 @@ public class ClLibro {
     private int disponible;
     private ClEditorial editorial;
     private ClCategoria categoria;
+    private String imagen;
 
     public ClLibro() {
     }
 
-    public ClLibro(int id, String titulo, String isbn, Date añoL, int numeroPaginas, int disponible, ClEditorial editorial, ClCategoria categoria) {
+    public ClLibro(int id, String titulo, String isbn, Date añoL, int numeroPaginas, int disponible, ClEditorial editorial, ClCategoria categoria, String imagen) {
         this.id = id;
         this.titulo = titulo;
         this.isbn = isbn;
@@ -25,6 +26,7 @@ public class ClLibro {
         this.disponible = disponible;
         this.editorial = editorial;
         this.categoria = categoria;
+        this.imagen = imagen;
     }
 
     public int getId() {
@@ -90,6 +92,16 @@ public class ClLibro {
     public void setCategoria(ClCategoria categoria) {
         this.categoria = categoria;
     }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    
     
 
     

@@ -12,6 +12,6 @@ public interface CategoriaDAO {
 
     boolean actualizarCategoria(ClCategoria categoria);
 
-    boolean buscarCategoria(int id);
+    ClCategoria buscarCategoria(int id);
 
 }

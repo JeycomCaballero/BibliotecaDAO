@@ -20,43 +20,82 @@
 
     <body class="loaded">
 
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
         <!-- Navbar Start -->
         <div class="container-fluid p-0 nav-bar">
             <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
                 <a href="index.jsp" class="navbar-brand px-lg-4 m-0">
                     <h1 class="m-0 display-4 text-uppercase text-white">BIBLIOSENA</h1>
                 </a>
+
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav ml-auto p-4">
-                        <a href="librosDisponiblesIndexServlet" class="nav-item nav-link ">Inicio</a>
+
+                        <!-- SIEMPRE -->
+                        <a href="librosDisponiblesIndexServlet" class="nav-item nav-link">Inicio</a>
                         <a href="about.jsp" class="nav-item nav-link">Nosotros</a>
                         <a href="service.jsp" class="nav-item nav-link">Servicios</a>
                         <a href="librosDisponiblesServlet" class="nav-item nav-link">Catalogo Libros</a>
-                        <a href="extras.jsp" class="nav-item nav-link active">EXTRAS</a>
+
+                        <!-- SOLO ADMIN -->
+                        <c:if test="${not empty sessionScope.usuario && sessionScope.rol == 'ADMIN'}">
+                            <a href="extras.jsp" class="nav-item nav-link">EXTRAS</a>
+                        </c:if>
+
+                        <!-- DROPDOWN -->
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu text-capitalize">
-                                <a href="registroPrestamoServlet" class="dropdown-item">Registro Prestamos</a>
-                                <a href="listaP.jsp" class="dropdown-item">Prestamos</a>
-                                <a href="login.jsp" class="dropdown-item">Login</a>
-                                <a href="registro.jsp" class="dropdown-item">Registro</a>
-                                <a href="index.jsp" class="dropdown-item">Cerrar sesion</a>
+
+                                <!-- NO LOGUEADO -->
+                                <c:if test="${empty sessionScope.usuario}">
+                                    <a href="login.jsp" class="dropdown-item">Login</a>
+                                    <a href="registro.jsp" class="dropdown-item">Registro</a>
+                                </c:if>
+
+                                <!-- LOGUEADO (ADMIN Y USER) -->
+                                <c:if test="${not empty sessionScope.usuario}">
+
+                                    <!-- TODOS LOS USUARIOS -->
+                                    <a href="registroPrestamoServlet" class="dropdown-item">Registro Prestamos</a>
+                                    <a href="listaPrestamoServlet" class="dropdown-item">Prestamos</a>
+
+                                    <!-- CERRAR SESION -->
+                                    <a href="logoutServlet" class="dropdown-item">Cerrar sesión</a>
+
+                                </c:if>
+
                             </div>
                         </div>
+
+                        <!-- MOSTRAR USUARIO -->
+                        <c:if test="${not empty sessionScope.usuario}">
+                            <span class="nav-item nav-link text-white">
+                                👤 ${sessionScope.usuario}
+                            </span>
+                        </c:if>
+
                     </div>
                 </div>
             </nav>
         </div>
         <!-- Navbar End -->
 
-        <!-- Header -->
-        <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
-            <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-                <h1 class="display-4 text-white text-uppercase">Panel Admin</h1>
-                <p class="text-white">Opciones avanzadas del sistema</p>
+
+        <!-- HEADER -->
+        <div class="container-fluid page-header mb-5 position-relative overlay-bottom"
+             data-aos="fade-down" data-aos-duration="1200">
+
+            <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+                <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Panel Admin</h1>
+                <div class="d-inline-flex mb-lg-5">
+                    <p class="m-0 text-white">Opciones avanzadas del sistema</p>
+                </div>
             </div>
         </div>
 
@@ -78,7 +117,7 @@
                     <div class="card text-center p-4" style="background:#33211D; border:none;">
                         <i class="fa fa-tags fa-3x text-primary mb-3"></i>
                         <h4 class="text-white">Categorías</h4>
-                        <a href="categorias.jsp" class="btn btn-primary mt-3">Ir</a>
+                        <a href="listaCategoriasServlet" class="btn btn-primary mt-3">Ir</a>
                     </div>
                 </div>
 
@@ -87,7 +126,7 @@
                     <div class="card text-center p-4" style="background:#33211D; border:none;">
                         <i class="fa fa-building fa-3x text-primary mb-3"></i>
                         <h4 class="text-white">Editoriales</h4>
-                        <a href="editoriales.jsp" class="btn btn-primary mt-3">Ir</a>
+                        <a href="listaEditorialServlet" class="btn btn-primary mt-3">Ir</a>
                     </div>
                 </div>
 
@@ -96,7 +135,7 @@
                     <div class="card text-center p-4" style="background:#33211D; border:none;">
                         <i class="fa fa-user-edit fa-3x text-primary mb-3"></i>
                         <h4 class="text-white">Autores</h4>
-                        <a href="autores.jsp" class="btn btn-primary mt-3">Ir</a>
+                        <a href="listaAutorServlet" class="btn btn-primary mt-3">Ir</a>
                     </div>
                 </div>
 
@@ -105,7 +144,15 @@
                     <div class="card text-center p-4" style="background:#33211D; border:none;">
                         <i class="fa fa-users fa-3x text-primary mb-3"></i>
                         <h4 class="text-white">Usuarios</h4>
-                        <a href="usuarios.jsp" class="btn btn-primary mt-3">Ir</a>
+                        <a href="listaUsuariosServlet" class="btn btn-primary mt-3">Ir</a>
+                    </div>
+                </div>
+                <!-- Multas -->
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card text-center p-4" style="background:#33211D; border:none;">
+                        <i class="fa fa-users fa-3x text-primary mb-3"></i>
+                        <h4 class="text-white">Multas</h4>
+                        <a href="listaMultasServlet" class="btn btn-primary mt-3">Ir</a>
                     </div>
                 </div>
 

@@ -23,32 +23,66 @@
 
     <body class="loaded">
 
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
         <!-- Navbar Start -->
         <div class="container-fluid p-0 nav-bar">
             <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
                 <a href="index.jsp" class="navbar-brand px-lg-4 m-0">
                     <h1 class="m-0 display-4 text-uppercase text-white">BIBLIOSENA</h1>
                 </a>
+
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav ml-auto p-4">
+
+                        <!-- SIEMPRE -->
                         <a href="librosDisponiblesIndexServlet" class="nav-item nav-link">Inicio</a>
                         <a href="about.jsp" class="nav-item nav-link">Nosotros</a>
                         <a href="service.jsp" class="nav-item nav-link">Servicios</a>
                         <a href="librosDisponiblesServlet" class="nav-item nav-link">Catalogo Libros</a>
-                        <a href="extras.jsp" class="nav-item nav-link">EXTRAS</a>
+
+                        <!-- SOLO ADMIN -->
+                        <c:if test="${not empty sessionScope.usuario && sessionScope.rol == 'ADMIN'}">
+                            <a href="extras.jsp" class="nav-item nav-link">EXTRAS</a>
+                        </c:if>
+
+                        <!-- DROPDOWN -->
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu text-capitalize">
-                                <a href="registroPrestamoServlet" class="dropdown-item">Registro Prestamos</a>
-                                <a href="listaP.jsp" class="dropdown-item">Prestamos</a>
-                                <a href="login.jsp" class="dropdown-item">Login</a>
-                                <a href="registro.jsp" class="dropdown-item">Registro</a>
-                                <a href="index.jsp" class="dropdown-item">Cerrar sesion</a>
+
+                                <!-- NO LOGUEADO -->
+                                <c:if test="${empty sessionScope.usuario}">
+                                    <a href="login.jsp" class="dropdown-item">Login</a>
+                                    <a href="registro.jsp" class="dropdown-item">Registro</a>
+                                </c:if>
+
+                                <!-- LOGUEADO (ADMIN Y USER) -->
+                                <c:if test="${not empty sessionScope.usuario}">
+
+                                    <!-- TODOS LOS USUARIOS -->
+                                    <a href="registroPrestamoServlet" class="dropdown-item">Registro Prestamos</a>
+                                    <a href="listaPrestamoServlet" class="dropdown-item">Prestamos</a>
+
+                                    <!-- CERRAR SESION -->
+                                    <a href="logoutServlet" class="dropdown-item">Cerrar sesión</a>
+
+                                </c:if>
+
                             </div>
                         </div>
+
+                        <!-- MOSTRAR USUARIO -->
+                        <c:if test="${not empty sessionScope.usuario}">
+                            <span class="nav-item nav-link text-white">
+                                👤 ${sessionScope.usuario}
+                            </span>
+                        </c:if>
+
                     </div>
                 </div>
             </nav>
@@ -111,6 +145,51 @@
                 once: true
             });
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+
+
+                const logout = "${param.logout}";
+
+                if (logout === "ok") {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Cerro Sesión",
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                }
+
+            });
+        </script>
+
+        <script>
+            const urlParams = new URLSearchParams(window.location.search);
+
+            if (urlParams.get('registro') === 'ok') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registro exitoso',
+                    text: 'Tu cuenta fue creada correctamente',
+                    confirmButtonColor: '#3085d6'
+                });
+            }
+        </script>
+
+        <c:if test="${not empty error}">
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: '${error}',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            </script>
+        </c:if>
 
     </body>
 </html>

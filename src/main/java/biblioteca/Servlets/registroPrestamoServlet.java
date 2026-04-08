@@ -41,35 +41,76 @@ public class registroPrestamoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion = request.getSession(false);
-        String libro = request.getParameter("libro");
-        int idLibro = 0;
-        idLibro = Integer.parseInt(libro);
-        String fechaE = request.getParameter("fechaDevolucion");
-        Date fechaEsperada = null;
+        if (sesion == null || sesion.getAttribute("usuario") == null) {
+            request.setAttribute("error", "debes Iniciar Sesion para  registrar un Prestamo");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+            return;
+        }
+
         try {
-            fechaEsperada = Date.valueOf(fechaE);
+
+            int idLibro = Integer.parseInt(request.getParameter("libro"));
+            String fechaE = request.getParameter("fechaDevolucion");
+
+            Date fechaEsperada;
+            try {
+                fechaEsperada = Date.valueOf(fechaE);
+            } catch (Exception e) {
+                request.setAttribute("error", "Formato de fecha inválido");
+
+                LibroAutorDAOImpl listarLibros = new LibroAutorDAOImpl();
+                request.setAttribute("libros", listarLibros.listarTodos());
+
+                request.getRequestDispatcher("reservation.jsp").forward(request, response);
+                return;
+            }
+
+            LibroDAOImpl libroDAO = new LibroDAOImpl();
+            if (!libroDAO.estaDisponible(idLibro)) {
+
+                request.setAttribute("error", "El libro no está disponible");
+
+                LibroAutorDAOImpl listarLibros = new LibroAutorDAOImpl();
+                request.setAttribute("libros", listarLibros.listarTodos());
+
+                request.getRequestDispatcher("reservation.jsp").forward(request, response);
+                return;
+            }
+
+            String usuario = (String) sesion.getAttribute("usuario");
+            UsuarioDaoImpl buscar = new UsuarioDaoImpl();
+            int idUsuario = buscar.buscarId(usuario);
+
+            ClUsuario usuarioId = new ClUsuario();
+            usuarioId.setId(idUsuario);
+
+            Date fechaC = Date.valueOf(LocalDate.now());
+
+            ClLibro libroId = new ClLibro();
+            libroId.setId(idLibro);
+
+            ClPrestamo oPrestamo = new ClPrestamo();
+            oPrestamo.setFechaPrestamo(fechaC);
+            oPrestamo.setFechaDevolucionEsperada(fechaEsperada);
+            oPrestamo.setEstado(1);
+            oPrestamo.setLibro(libroId);
+            oPrestamo.setUsuario(usuarioId);
+
+            PrestamoDAOImpl registrarP = new PrestamoDAOImpl();
+            registrarP.registrarPrestamo(oPrestamo);
+
+            response.sendRedirect("listaPrestamoServlet");
 
         } catch (Exception e) {
-            System.out.println("Formato de fecha invalido: " + fechaE);
-        }
-        String usuario = (String) sesion.getAttribute("usuario");
-        UsuarioDaoImpl buscar = new UsuarioDaoImpl();
-        int idUsuario = buscar.buscarId(usuario);
-        ClUsuario usuarioId = new ClUsuario();
-        usuarioId.setId(idUsuario);
-        LocalDate fechaActual = LocalDate.now();
-        Date fechaC = Date.valueOf(fechaActual);
-        ClLibro libroId = new ClLibro();
-        libroId.setId(idLibro);
+            e.printStackTrace();
 
-        PrestamoDAOImpl registrarP = new PrestamoDAOImpl();
-        ClPrestamo oPrestamo = new ClPrestamo();
-        oPrestamo.setFechaPrestamo(fechaC);
-        oPrestamo.setFechaDevolucionEsperada(fechaEsperada);
-        oPrestamo.setEstado(1);
-        oPrestamo.setLibro(libroId);
-        oPrestamo.setUsuario(usuarioId);
-        registrarP.registrarPrestamo(oPrestamo);
+            request.setAttribute("error", "Error al registrar el préstamo");
+
+            LibroAutorDAOImpl listarLibros = new LibroAutorDAOImpl();
+            request.setAttribute("libros", listarLibros.listarTodos());
+
+            request.getRequestDispatcher("reservation.jsp").forward(request, response);
+        }
     }
 
     @Override
